@@ -7,10 +7,8 @@ html {
 /* 自定义滚动条 */
 .wsx_scroll {
     z-index: 999999999;
-    width: 30px;
     position: fixed;
-    right: 0px;
-    top: 0px;
+
     display: none;
     user-select: none;
     transition: opacity 200ms linear;
@@ -20,7 +18,6 @@ html {
 
 .wsx_scroll_bar {
     position: relative;
-    height: 100%;
     pointer-events: none;
     user-select: none;
     padding: 0;
@@ -30,50 +27,43 @@ html {
 .wsx_fade {
     z-index: 9999999999;
     position: fixed;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    padding: 0;
+    margin: 0;
+}
+
+.wsx_vertical_scroll {
+    width: 30px;
+    right: 0px;
+    top: 0px;
+}
+
+.wsx_vertical_scroll_bar {
+    height: 100%;
+}
+
+.wsx_vertical_fade {
     right: 0px;
     top: 0px;
     width: 45px;
-    display: block;
     height: 100%;
-    pointer-events: none;
-    user-select: none;
-    padding: 0;
-    margin: 0;
 }
 
-/* horizontal */
-.niu_scroll {
-    z-index: 999999999;
+.wsx_horizontal_scroll {
     height: 30px;
-    position: fixed;
     left: 0px;
     bottom: 0px;
-    display: none;
-    user-select: none;
-    transition: opacity 200ms linear;
-    padding: 0;
-    margin: 0;
 }
 
-.niu_scroll_bar {
-    position: relative;
+.wsx_horizontal_scroll_bar {
     width: 100%;
-    pointer-events: none;
-    user-select: none;
-    padding: 0;
-    margin: 0;
 }
 
-.niu_fade {
-    z-index: 9999999999;
-    position: fixed;
+.wsx_horizontal_fade {
     left: 0px;
     bottom: 0px;
     height: 30px;
-    display: block;
     width: 100%;
-    pointer-events: none;
-    user-select: none;
-    padding: 0;
-    margin: 0;
 }

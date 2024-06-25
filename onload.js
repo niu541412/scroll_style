@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const rand = Math.floor(config.backgroundColor.length * Math.random());
     const timeoutSec = 500;
 
-    document.body.insertAdjacentHTML('beforeend', '<div class="wsx_fade"></div><div class="wsx_scroll"><div class="wsx_scroll_bar"></div></div>');
-    document.querySelector('.wsx_scroll_bar').style.cssText = `
+    document.body.insertAdjacentHTML('beforeend', '<div class="wsx_fade wsx_vertical_fade"></div><div class="wsx_scroll wsx_vertical_scroll"><div class="wsx_scroll_bar wsx_vertical_scroll_bar"></div></div>');
+    document.querySelector('.wsx_vertical_scroll_bar').style.cssText = `
         background-color: ${config.backgroundColor[rand]};
         opacity: ${config.opacity};
         border-radius: ${config.borderRadius};
@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
         left: ${config.left};
     `;
 
-    document.body.insertAdjacentHTML('beforeend', '<div class="niu_fade"></div><div class="niu_scroll"><div class="niu_scroll_bar"></div></div>');
-    document.querySelector('.niu_scroll_bar').style.cssText = `
+    document.body.insertAdjacentHTML('beforeend', '<div class="wsx_fade wsx_horizontal_fade"></div><div class="wsx_scroll wsx_horizontal_scroll"><div class="wsx_scroll_bar wsx_horizontal_scroll_bar"></div></div>');
+    document.querySelector('.wsx_horizontal_scroll_bar').style.cssText = `
         background-color: ${config.backgroundColor[rand]};
         opacity: ${config.opacity};
         border-radius: ${config.borderRadius};
@@ -32,10 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
     var content = document.documentElement || document.body;
     var change_y = window.innerHeight;
     var scrollShow_y = false;
-    var wsx_t;
+    var wsx_vertical_t;
     var change_x = window.innerWidth;
     var scrollShow_x = false;
-    var niu_t;
+    var wsx_horizontal_t;
 
     function upScrollHeight() {
         var full_win = Array.from(document.querySelectorAll("*")).some(function (el) {
@@ -46,14 +46,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 parseInt(cs.width, 10) >= window.innerWidth;
         });
 
-        clearTimeout(wsx_t);
-        clearTimeout(niu_t);
+        clearTimeout(wsx_vertical_t);
+        clearTimeout(wsx_horizontal_t);
         var wHeight = document.documentElement.clientHeight;
         var wWidth = document.documentElement.clientWidth;
         var dHeight = document.documentElement.scrollHeight;
         var dWidth = document.documentElement.scrollWidth;
-        var tmpScroll_y = document.querySelector('.wsx_scroll');
-        var tmpScroll_x = document.querySelector('.niu_scroll');
+        var tmpScroll_y = document.querySelector('.wsx_vertical_scroll');
+        var tmpScroll_x = document.querySelector('.wsx_horizontal_scroll');
 
         if (dHeight <= wHeight || full_win) {
             if (scrollShow_y) {
@@ -90,14 +90,14 @@ document.addEventListener("DOMContentLoaded", function () {
         tmpScroll_x.style.left = left + 'px';
         tmpScroll_x.style.width = scrollWidth + 'px';
 
-        wsx_t = setTimeout(function () {
+        wsx_vertical_t = setTimeout(function () {
             tmpScroll_y.style.cssText += `
                 opacity: 0;
                 pointer-events: none;
             `;
             scrollShow_y = false;
         }, timeoutSec);
-        niu_t = setTimeout(function () {
+        wsx_horizontal_t = setTimeout(function () {
             tmpScroll_x.style.cssText += `
                 opacity: 0;
                 pointer-events: none;
@@ -138,13 +138,13 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!scrollShow_y) {
                 upScrollHeight();
             }
-            clearTimeout(wsx_t);
+            clearTimeout(wsx_vertical_t);
             always_y = true;
         } else {
             if (always_y) {
                 always_y = false;
-                wsx_t = setTimeout(function () {
-                    document.querySelector('.wsx_scroll').style.cssText += `
+                wsx_vertical_t = setTimeout(function () {
+                    document.querySelector('.wsx_vertical_scroll').style.cssText += `
                         opacity: 0;
                         pointer-events: none;
                     `;
@@ -156,13 +156,13 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!scrollShow_x) {
                 upScrollHeight();
             }
-            clearTimeout(niu_t);
+            clearTimeout(wsx_horizontal_t);
             always_x = true;
         } else {
             if (always_x) {
                 always_x = false;
-                niu_t = setTimeout(function () {
-                    document.querySelector('.niu_scroll').style.cssText += `
+                wsx_horizontal_t = setTimeout(function () {
+                    document.querySelector('.wsx_horizontal_scroll').style.cssText += `
                         opacity: 0;
                         pointer-events: none;
                     `;
@@ -171,23 +171,23 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
         if (mousedown_y) {
-            document.querySelector('.wsx_fade').style.pointerEvents = 'auto';
+            document.querySelector('.wsx_vertical_fade').style.pointerEvents = 'auto';
             var endY = event.clientY;
             var top = endY - startY + Y;
             top = Math.max(0, top);
-            var max_height = window.innerHeight - document.querySelector('.wsx_scroll').offsetHeight;
+            var max_height = window.innerHeight - document.querySelector('.wsx_vertical_scroll').offsetHeight;
             top = Math.min(max_height, top);
-            var scroll_top = top / (window.innerHeight - document.querySelector('.wsx_scroll').offsetHeight) * (document.documentElement.scrollHeight - window.innerHeight);
+            var scroll_top = top / (window.innerHeight - document.querySelector('.wsx_vertical_scroll').offsetHeight) * (document.documentElement.scrollHeight - window.innerHeight);
             document.documentElement.scrollTop = document.body.scrollTop = scroll_top;
         }
         if (mousedown_x) {
-            document.querySelector('.niu_fade').style.pointerEvents = 'auto';
+            document.querySelector('.wsx_horizontal_fade').style.pointerEvents = 'auto';
             var endX = event.clientX;
             var left = endX - startX + X;
             left = Math.max(0, left);
-            var max_width = window.innerWidth - document.querySelector('.niu_scroll').offsetWidth;
+            var max_width = window.innerWidth - document.querySelector('.wsx_horizontal_scroll').offsetWidth;
             left = Math.min(max_width, left);
-            var scroll_left = left / (window.innerWidth - document.querySelector('.niu_scroll').offsetWidth) * (document.documentElement.scrollWidth - window.innerWidth);
+            var scroll_left = left / (window.innerWidth - document.querySelector('.wsx_horizontal_scroll').offsetWidth) * (document.documentElement.scrollWidth - window.innerWidth);
             document.documentElement.scrollLeft = document.body.scrollLeft = scroll_left;
         }
     });
@@ -195,8 +195,8 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener('mousedown', function (event) {
         startY = event.clientY;
         startX = event.clientX;
-        Y = (document.documentElement.scrollTop || document.body.scrollTop) / (document.documentElement.scrollHeight - window.innerHeight) * (window.innerHeight - document.querySelector('.wsx_scroll').offsetHeight);
-        X = (document.documentElement.scrollLeft || document.body.scrollLeft) / (document.documentElement.scrollWidth - window.innerWidth) * (window.innerWidth - document.querySelector('.niu_scroll').offsetWidth);
+        Y = (document.documentElement.scrollTop || document.body.scrollTop) / (document.documentElement.scrollHeight - window.innerHeight) * (window.innerHeight - document.querySelector('.wsx_vertical_scroll').offsetHeight);
+        X = (document.documentElement.scrollLeft || document.body.scrollLeft) / (document.documentElement.scrollWidth - window.innerWidth) * (window.innerWidth - document.querySelector('.wsx_horizontal_scroll').offsetWidth);
 
         if ((content.clientWidth - event.clientX) < 40 && (content.clientWidth - event.clientX) >= 0) {
             mousedown_y = true;
@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.onselectstart = null;
         mousedown_y = false;
         mousedown_x = false;
-        document.querySelector('.wsx_fade').style.pointerEvents = 'none';
-        document.querySelector('.niu_fade').style.pointerEvents = 'none';
+        document.querySelector('.wsx_vertical_fade').style.pointerEvents = 'none';
+        document.querySelector('.wsx_horizontal_fade').style.pointerEvents = 'none';
     });
 });
