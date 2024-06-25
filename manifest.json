@@ -1,19 +1,28 @@
 {
-   "content_scripts": [ {
-      "css": [ "css.css" ],
-      "js": [ "jquery.min.js", "onload.js"],
-      "matches": [ "http://*/*", "https://*/*" ],
-      "run_at": "document_start"
-   } ],
+   "content_scripts": [
+      {
+         "css": [
+            "css.css"
+         ],
+         "js": [
+            "onload.js"
+         ],
+         "run_at": "document_start",
+         "matches": [
+            "http://*/*",
+            "https://*/*"
+         ]
+      }
+   ],
+   "author": "onlywsx & 書",
    "description": "Like android's scroll bars. 像android的滚动条。Forked from onlywsx's extension. 移植自onlywsx的原扩展",
    "icons": {
-      "128": "icon128.png",
-      "16": "icon16.png",
-      "32": "icon32.png",
-      "48": "icon48.png"
+      "16": "asset/icon16.png",
+      "32": "asset/icon32.png",
+      "48": "asset/icon48.png",
+      "128": "asset/icon128.png"
    },
    "manifest_version": 2,
    "name": "scroll style",
-   "permissions": [ "http://*/*", "https://*/*" ],
-   "version": "1.2.5"
+   "version": "1.2.6"
 }
