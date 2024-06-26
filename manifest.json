@@ -1,9 +1,6 @@
 {
    "content_scripts": [
       {
-         "css": [
-            "css.css"
-         ],
          "js": [
             "onload.js"
          ],
@@ -22,7 +19,14 @@
       "48": "asset/icon48.png",
       "128": "asset/icon128.png"
    },
+   "minimum_chrome_version": "121",
+   "browser_specific_settings": {
+      "gecko": {
+         "id": "{51b269bc-390e-4216-a73c-8b3377213010}",
+         "strict_min_version": "64.0"
+      }
+   },
    "manifest_version": 3,
    "name": "scroll style",
-   "version": "1.3.0"
+   "version": "1.3.1"
 }
