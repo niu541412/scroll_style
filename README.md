@@ -11,6 +11,8 @@ Download: [Chrome](https://chromewebstore.google.com/detail/scroll-style/dojgafh
 ---
 
 ## Changlog:
+- 1.3.1
+  - use scroll-bar api, much much simpler.
 - 1.3.0
   - migrate to manifest v3
 - 1.2.6
